@@ -1,0 +1,45 @@
+{
+  "name": "emotr",
+  "version": "1.0.0",
+  "description": "emoji only social network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --open",
+    "build": "webpack",
+    "start": "node client/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goblin-shark-32/emotr.git"
+  },
+  "keywords": [
+    "emoji",
+    "twitter"
+  ],
+  "author": "EZW1 TimothyRuszala ClareCerullo 347Online",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goblin-shark-32/emotr/issues"
+  },
+  "homepage": "https://github.com/goblin-shark-32/emotr#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "postgres": "^3.0.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.4",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^27.5.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  }
+}
