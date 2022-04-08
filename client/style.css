@@ -1,0 +1,23 @@
+.pfp {
+  font-size: 72pt;
+}
+
+.emote {
+  padding: 10pt;
+  margin: 10pt;
+  width: 50%;
+  border: 1px solid lightgray;
+  border-radius: 6pt;
+  position: relative;
+}
+
+.deleteButton {
+  margin: 10pt;
+  width: 10%;
+  height: 18%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 4pt;
+  background-color: whitesmoke;
+}
