@@ -6,6 +6,7 @@ const messageController = {};
 // Middleware for posting a new emote/message
 // No result
 messageController.postMessage = (req, res, next) => {
+  console.log(req.body);
   const { message } = req.body; // Object {"message": String}
   const values = [message]; 
 
@@ -40,7 +41,7 @@ messageController.getMessages = (req, res, next) => {
 // Middleware for deleting emote/message
 // No result
 messageController.deleteMessage = (req, res, next) => {
-  const deleteId = req.params._id; // Object {"_id": Number}
+  const deleteId = req.params.id; // Object {"_id": Number}
   values = [deleteId];
 
   const queryText = 'DELETE FROM messages WHERE _id = $1';
