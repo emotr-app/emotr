@@ -1,2 +1,2 @@
 #!/bin/bash
-rm -rm dist
+rm -rf dist
