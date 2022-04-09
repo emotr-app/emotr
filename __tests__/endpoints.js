@@ -1,11 +1,16 @@
 const request = require('supertest');
 const fs = require('fs');
 const path = require('path');
+const db = require('../server/db/db.js');
 
 // const testJsonFile = path.resolve(__dirname, '../server/db/markets.test.json');
 
 const server = 'http://localhost:3000';
 
+/* 
+  NOTE: This testing suite would be much better with a mock database. I chose not to make one, because
+  I would need to refactor code that others are working on in order to allow dependency injection.
+*/
 
 describe('Route integration', () => {
   describe('/feed', () => {
@@ -19,6 +24,93 @@ describe('Route integration', () => {
           .expect('Content-Type', /application\/json/)
           .expect(200);
       });
+
+
+      it('gives a 404 when trying to access a nonexistent page', () => {
+        return request(server)
+          .get('/feed/alsdkfjlsakdfj')
+          .expect(404);
+      });
     });
+
+    describe('POST', () => {
+      it('responds with 200 status and text/html content type', async () => {
+        const response = await request(server)
+          .post('/feed')
+          .send({
+            "message": "😀"
+          });
+        expect(response.statusCode).toBe(200);
+
+        // cleanup
+        const queryStringDelete = `DELETE FROM messages WHERE message = '😀'`;
+        db.query(queryStringDelete);
+      });
+
+      it('handles messages which are too long gracefully', () => {
+        return request(server)
+          .post('/feed')
+          .send({
+            "message": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+          })
+          .expect(400);
+      });
+
+      it('doesn\'t allow messages which include normal letters', async () => {
+        const msg = "forbidden msg";
+        const result = await request(server)
+          .post('/feed')
+          .send({
+            "message": msg
+          });
+        
+        expect(result.statusCode).toBe(400);
+        db.query(`DELETE FROM messages WHERE message = ${msg}`);
+      });
+
+      it('gives a 400 error when request body invalid', () => {
+        return request(server)
+          .post('/feed')
+          .send({
+            "bad key": "bad val"
+          })
+          .expect(400);
+      });
+
+    });
+
+    describe('DELETE', () => {
+
+      let idToDelete;
+      let msg = '😀😀😀';
+      beforeEach(async () => {
+        // post the message to delete, and get its id
+        queryStringInsert = `INSERT INTO messages (message) VALUES ('${msg}') RETURNING _id`;
+        const data = await db.query(queryStringInsert);
+        idToDelete = data.rows[0]._id;
+      });
+
+      afterEach(async () => {
+        // cleanup:
+        const queryStringDelete = `DELETE FROM messages WHERE message = '${msg}'`;
+        db.query(queryStringDelete);
+      });
+
+      it('deletes a message', async () => {
+        // delete message via server
+        const result =
+          await request(server)
+          .del(`/feed/${idToDelete}`);
+
+        console.log('deleted');
+        expect(result.statusCode).toBe(200);
+      });
+    });
+  });
+
+  it('gives a 404 when trying to access a nonexistent page', () => {
+    return request(server)
+      .get('/asdlkfjaslkfj')
+      .expect(404);
   });
 });

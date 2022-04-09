@@ -13,7 +13,8 @@ app.use('/', emoteRouter);
 
 app.use(express.static(path.resolve(__dirname, '../client'))); //serves the index.html
 
-//Create an emote/message
+// Create an emote/message
+// req.body expected to be object of format: {"message": String}
 emoteRouter.post('/feed', messageController.postMessage, (req, res) => {
   return res.sendStatus(200);
 });
