@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {createRoot} from 'react-dom/client';
 import Emote from './components/Emote.jsx';
+import ResponsiveAppBar from './components/Navbar.jsx';
 
 const test_messages = [
   '🧀 🚸 ♠️ ⛔️ 💴 🔜 🆖 😙 🙀 🍋 👪 🗣 💛 😅 🐔 🏰',
@@ -38,6 +39,7 @@ class App extends Component {
 
     return (
       <div>
+        <ResponsiveAppBar />
         {emotes}
       </div>
     );

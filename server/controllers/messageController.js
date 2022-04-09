@@ -41,7 +41,7 @@ messageController.getMessages = (req, res, next) => {
 // Middleware for deleting emote/message
 // No result
 messageController.deleteMessage = (req, res, next) => {
-  const deleteId = req.params.id; // Object {"_id": Number}
+  const deleteId = req.body._id; // Object {"_id": Number}
   values = [deleteId];
 
   const queryText = 'DELETE FROM messages WHERE _id = $1';
