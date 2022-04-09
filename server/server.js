@@ -13,17 +13,17 @@ app.use(express.static(path.resolve(__dirname, '../client'))); //serves the inde
 
 //Create an emote/message
 emoteRouter.post('/feed', messageController.postMessage, (req, res) => {
-
+  return res.status(200).json(res.locals);
 });
 
 //Get emotes/messages
 emoteRouter.get('/feed', messageController.getMessages, (req, res) => {
-
+  return res.status(200).json(res.locals);
 });
 
 //Delete emote/message
 emoteRouter.delete('/feed/:id', messageController.deleteMessage, (req, res) => {
-
+  return res.status(200).json(res.locals);
 });
 
 
