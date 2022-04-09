@@ -6,6 +6,8 @@ const PORT = 3000;
 
 const messageController = require('./controllers/messageController');
 
+app.use(express.json());
+
 const emoteRouter = express.Router();
 app.use('/', emoteRouter);
 
@@ -13,17 +15,17 @@ app.use(express.static(path.resolve(__dirname, '../client'))); //serves the inde
 
 //Create an emote/message
 emoteRouter.post('/feed', messageController.postMessage, (req, res) => {
-  return res.status(200).json(res.locals);
+  return res.sendStatus(200);
 });
 
 //Get emotes/messages
 emoteRouter.get('/feed', messageController.getMessages, (req, res) => {
-  return res.status(200).json(res.locals);
+  return res.status(200).json(res.locals.feedData);
 });
 
 //Delete emote/message
 emoteRouter.delete('/feed/:id', messageController.deleteMessage, (req, res) => {
-  return res.status(200).json(res.locals);
+  return res.sendStatus(200);
 });
 
 
