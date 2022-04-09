@@ -24,6 +24,9 @@
     "url": "https://github.com/goblin-shark-32/emotr/issues"
   },
   "homepage": "https://github.com/goblin-shark-32/emotr#readme",
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -39,6 +42,8 @@
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.0.0",
     "babel-loader": "^8.2.4",
     "concurrently": "^7.1.0",
     "css-loader": "^6.7.1",
