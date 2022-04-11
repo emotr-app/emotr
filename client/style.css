@@ -35,6 +35,27 @@ button {
   background-color: whitesmoke;
 }
 
-#composeBox {
-  width: 190px;
+.compose {
+  padding: 10pt;
+  margin: 10pt;
+  width: 240px;
+  border: 1px solid lightgray;
+  border-radius: 6pt;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: 21px;
+}
+
+#compose-box {
+  width: 230px;
+  height: 60px;
+  margin-bottom: 45px;
+  font-size: 19px;
+  align-items: center;
+  resize: none;
+}
+
+.compose-component {
+  border: 1px black solid;
 }
