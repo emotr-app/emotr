@@ -40,11 +40,13 @@ describe('Route integration', () => {
           .send({
             "message": "😀"
           });
-        expect(response.statusCode).toBe(200);
+
 
         // cleanup
         const queryStringDelete = `DELETE FROM messages WHERE message = '😀'`;
         db.query(queryStringDelete);
+        
+        expect(response.statusCode).toBe(200);      
       });
 
       it('handles messages which are too long gracefully', () => {
@@ -64,8 +66,9 @@ describe('Route integration', () => {
             "message": msg
           });
         
-        expect(result.statusCode).toBe(400);
         db.query(`DELETE FROM messages WHERE message = ${msg}`);
+        
+        expect(result.statusCode).toBe(400);
       });
 
       it('gives a 400 error when request body invalid', () => {
