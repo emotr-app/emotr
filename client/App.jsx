@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import {createRoot} from 'react-dom/client';
-import Emote from './components/Emote.jsx';
-import ResponsiveAppBar from './components/Navbar.jsx';
-//import EmojiPicker from './components/EmojiPicker.jsx';
-import Compose from './components/Compose.jsx';
+import React, { Component } from "react";
+import { createRoot } from "react-dom/client";
+import Emote from "./components/Emote.jsx";
+import ResponsiveAppBar from "./components/Navbar.jsx";
+import Compose from "./components/Compose.jsx";
 
 const test_messages = [
   { _id: -100, message: "🧀 🚸 ♠️ ⛔️ 💴 🔜 🆖 😙 🙀 🍋 👪 🗣 💛 😅 🐔 🏰" },
@@ -51,7 +50,8 @@ class App extends Component {
   handleChange(event) {
     // Check if current message is only emojis.
     const msg = event.target.value;
-    const regex = /^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])+$/gi;
+    const regex =
+      /^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])*$/gi;
     if (!regex.test(msg)) return; // what is the expected behavior when a non-emoji is attempted? Nothing?
 
     this.setState({ ...this.state, currentMessage: event.target.value });
@@ -77,7 +77,10 @@ class App extends Component {
   }
 
   insert(char) {
-    this.setState({...this.state, currentMessage: this.state.currentMessage+char});
+    this.setState({
+      ...this.state,
+      currentMessage: this.state.currentMessage + char,
+    });
   }
 
   loadMessages() {
