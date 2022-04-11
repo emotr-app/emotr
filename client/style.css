@@ -12,12 +12,13 @@
 .emote {
   padding: 10pt;
   margin: 10pt;
-  width: 180px;
+  width: 240px;
   border: 1px solid lightgray;
   border-radius: 6pt;
   position: relative;
   display: flex;
   flex-direction: column;
+  font-size: 21px;
 }
 
 .deleteButton {
