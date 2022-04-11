@@ -6,7 +6,7 @@ const Emote = (props) => {
       <div className="deleteButton">
         <button onClick={() => props.handleDelete(props.id)}>🗑️</button>
       </div>
-      <div className="pfp">😃</div>
+      <div className="pfp">{props.pfp ?? '😀'}</div>
       <div>{props.msg}</div>
     </div>
   );
