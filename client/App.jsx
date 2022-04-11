@@ -29,7 +29,7 @@ class App extends Component {
 
   sendMessage() {
     //Construct the request body with the current message, turned into a JSON string
-    const body = JSON.stringify({ message: this.state.currentMessage });
+    const body = JSON.stringify({ message: this.state.currentMessage, pfp: this.state.pfp });
 
     //Construct the POST request with the request body
     const request = {
@@ -113,12 +113,13 @@ class App extends Component {
     const emotes = [];
 
     for (let i = messages.length - 1; i >= 0; i--) {
-      const { _id, message } = messages[i];
+      const { _id, message, pfp } = messages[i];
       emotes.push(
         <Emote
           key={_id}
           id={_id}
           msg={message}
+          pfp={pfp}
           handleDelete={this.handleDelete}
         />
       );
