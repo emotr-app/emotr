@@ -12,12 +12,15 @@
 }
 
 .deleteButton {
-  margin: 10pt;
-  width: 10%;
-  height: 18%;
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+button {
+  margin: 10pt;
+  width: 50pt;
+  height: 20pt;
   border-radius: 4pt;
   background-color: whitesmoke;
 }

@@ -25,7 +25,7 @@ emoteRouter.get('/feed', messageController.getMessages, (req, res) => {
 });
 
 //Delete emote/message
-emoteRouter.delete('/feed/:id', messageController.deleteMessage, (req, res) => {
+emoteRouter.delete('/feed', messageController.deleteMessage, (req, res) => {
   return res.sendStatus(200);
 });
 
