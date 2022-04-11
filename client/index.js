@@ -1,4 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import './App.jsx'; //App is attached to the DOM inside of this file
 
-ReactDOM.render(<h1>Hello World</h1>, document.getElementById("root"));
+import './style.css';

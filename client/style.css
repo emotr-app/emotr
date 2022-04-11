@@ -1,0 +1,61 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pfp {
+  font-size: 70px;
+  margin: 20px;
+}
+
+.emote {
+  padding: 10pt;
+  margin: 10pt;
+  width: 240px;
+  border: 1px solid lightgray;
+  border-radius: 6pt;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: 21px;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+button {
+  margin: 10pt;
+  width: 30pt;
+  height: 30pt;
+  border-radius: 4pt;
+  background-color: whitesmoke;
+}
+
+.compose {
+  padding: 10pt;
+  margin: 10pt;
+  width: 240px;
+  border: 1px solid lightgray;
+  border-radius: 6pt;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: 21px;
+}
+
+#compose-box {
+  width: 230px;
+  height: 60px;
+  margin-bottom: 45px;
+  font-size: 19px;
+  align-items: center;
+  resize: none;
+}
+
+.compose-component {
+  border: 1px black solid;
+}
