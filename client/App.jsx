@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {createRoot} from 'react-dom/client';
 import Emote from './components/Emote.jsx';
 import ResponsiveAppBar from './components/Navbar.jsx';
-import EmojiPicker from './components/EmojiPicker.jsx';
+//import EmojiPicker from './components/EmojiPicker.jsx';
 import Compose from './components/Compose.jsx';
 
 const test_messages = [
@@ -20,6 +20,7 @@ class App extends Component {
     this.state = {messages: []};
     this.sendMessage = this.sendMessage.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.insert = this.insert.bind(this);
   }
 
   sendMessage() {
@@ -50,6 +51,10 @@ class App extends Component {
     // TO DO: ADD REGEX MATCH FOR SANITIZING USER INPUT (Emoji's only!)
     
     this.setState({...this.state, currentMessage: event.target.value});
+  }
+
+  insert(char) {
+    this.setState({...this.state, currentMessage: this.state.currentMessage+char});
   }
 
   loadMessages() {
@@ -87,6 +92,7 @@ class App extends Component {
         {/*Event handlers that modify state are passed into Compose component
         as well as the current message*/}
         <Compose
+          insert={this.insert}
           change={this.handleChange}
           send={this.sendMessage}
           currentMessage={this.state.currentMessage}
