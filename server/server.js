@@ -1,17 +1,24 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 
 const PORT = 3000;
 
 const messageController = require('./controllers/messageController');
 const validationController = require('./controllers/validationController');
+const authRouter = require('./routers/authRouter.js');
 
 
 app.use(express.json());
+app.use(cookieParser());
 
 const emoteRouter = express.Router();
 app.use('/', emoteRouter);
+app.use('/auth', authRouter);
+
+
+
 
 app.use(express.static(path.resolve(__dirname, '../client'))); //serves the index.html
 
@@ -31,6 +38,7 @@ emoteRouter.get('/feed', messageController.getMessages, (req, res) => {
 emoteRouter.delete('/feed', messageController.deleteMessage, (req, res) => {
   return res.sendStatus(200);
 });
+
 
 
 //Unknown route handler
