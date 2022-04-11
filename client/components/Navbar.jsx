@@ -12,10 +12,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
-const pages = ["About", "Account"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = []; // ["About", "Account"];
+const settings = [];// ["Profile", "Account", "Dashboard", "Logout"];
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -23,7 +23,7 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+    //setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -104,11 +104,9 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, bgcolor: 'darkblue' }}>
+              {props.pfp}
+            </IconButton>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"

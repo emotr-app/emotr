@@ -13,7 +13,7 @@ class Compose extends Component {
     return (
       <div>
         <span style={{top: 0}}>
-          <span className='pfp'>😃</span>
+          <span className='pfp'>{this.props.pfp}</span>
           <textarea id="composeBox" placeholder='😂' rows="8" cols="80" value={this.props.currentMessage} onChange={this.props.change}></textarea>
           <button onClick={this.props.send}>📩</button>
         </span>
