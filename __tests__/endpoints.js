@@ -44,13 +44,8 @@ describe('Route integration', () => {
 
         // cleanup
         const queryStringDelete = `DELETE FROM messages WHERE message = '😀'`;
-<<<<<<< HEAD
-        await db.query(queryStringDelete);
-=======
         db.query(queryStringDelete);
-        
         expect(response.statusCode).toBe(200);      
->>>>>>> dev
       });
 
       it('handles messages which are too long gracefully', () => {
@@ -70,14 +65,8 @@ describe('Route integration', () => {
             "message": msg
           });
         
-<<<<<<< HEAD
         expect(result.statusCode).toBe(400);
         await db.query(`DELETE FROM messages WHERE message = '${msg}'`);
-=======
-        db.query(`DELETE FROM messages WHERE message = ${msg}`);
-        
-        expect(result.statusCode).toBe(400);
->>>>>>> dev
       });
 
       it('gives a 400 error when request body invalid', () => {
