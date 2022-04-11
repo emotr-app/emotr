@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+// This component has the text input area and emoji picker for sending a message
+
 class Compose extends Component {
   constructor(props) {
     super(props);
