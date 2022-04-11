@@ -13,7 +13,7 @@ class Compose extends Component {
     return (
       <div className="compose">
         <div style={{ top: 0 }}>
-          <div className="pfp">😃</div>
+          <div className="pfp">{this.props.pfp}</div>
           <textarea
             id="compose-box"
             placeholder="Emojis only! Up to 16"
