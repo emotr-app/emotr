@@ -4,12 +4,11 @@ An Emoji-only social network
 # Front End <-> Back End Protocol
 ## Get
 * ### Response:
-  ```Array [Object {"message": String, "_id": Number}, Object {"message": String, "_id": Number}, ...]```
-
-  Sender and Time not yet specified  
+  ```Array [Object {"message": String, "_id": Number, "pfp": String}, Object {"message": String, "_id": Number, "pfp": String}, ...]```
+  
 ## Post
 * ### Request
-  ```Object {"message": String}```
+  ```Object {"message": String, "pfp": String}```
 
   Sender not yet specified
 
