@@ -2,6 +2,7 @@ const request = require('supertest');
 const fs = require('fs');
 const path = require('path');
 const db = require('../server/db/db.js');
+import 'regenerator-runtime/runtime'; // Stack Overflow told me to do this. I was getting weird errors with async functions.
 
 // const testJsonFile = path.resolve(__dirname, '../server/db/markets.test.json');
 
@@ -11,7 +12,6 @@ const server = 'http://localhost:3000';
   NOTE: This testing suite would be much better with a mock database. I chose not to make one, because
   I would need to refactor code that others are working on in order to allow dependency injection.
 */
-
 describe('Route integration', () => {
   describe('/feed', () => {
     describe('GET', () => {
@@ -44,7 +44,7 @@ describe('Route integration', () => {
 
         // cleanup
         const queryStringDelete = `DELETE FROM messages WHERE message = '😀'`;
-        db.query(queryStringDelete);
+        await db.query(queryStringDelete);
       });
 
       it('handles messages which are too long gracefully', () => {
@@ -65,7 +65,7 @@ describe('Route integration', () => {
           });
         
         expect(result.statusCode).toBe(400);
-        db.query(`DELETE FROM messages WHERE message = ${msg}`);
+        await db.query(`DELETE FROM messages WHERE message = '${msg}'`);
       });
 
       it('gives a 400 error when request body invalid', () => {
@@ -85,7 +85,7 @@ describe('Route integration', () => {
       let msg = '😀😀😀';
       beforeEach(async () => {
         // post the message to delete, and get its id
-        queryStringInsert = `INSERT INTO messages (message) VALUES ('${msg}') RETURNING _id`;
+        const queryStringInsert = `INSERT INTO messages (message) VALUES ('${msg}') RETURNING _id`;
         const data = await db.query(queryStringInsert);
         idToDelete = data.rows[0]._id;
       });
@@ -93,14 +93,15 @@ describe('Route integration', () => {
       afterEach(async () => {
         // cleanup:
         const queryStringDelete = `DELETE FROM messages WHERE message = '${msg}'`;
-        db.query(queryStringDelete);
+        await db.query(queryStringDelete);
       });
 
       it('deletes a message', async () => {
         // delete message via server
         const result =
           await request(server)
-          .del(`/feed/${idToDelete}`);
+          .del(`/feed`)
+          .send({"_id": idToDelete});
 
         console.log('deleted');
         expect(result.statusCode).toBe(200);

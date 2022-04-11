@@ -5,6 +5,8 @@ const app = express();
 const PORT = 3000;
 
 const messageController = require('./controllers/messageController');
+const validationController = require('./controllers/validationController');
+
 
 app.use(express.json());
 
@@ -15,7 +17,7 @@ app.use(express.static(path.resolve(__dirname, '../client'))); //serves the inde
 
 // Create an emote/message
 // req.body expected to be object of format: {"message": String}
-emoteRouter.post('/feed', messageController.postMessage, (req, res) => {
+emoteRouter.post('/feed', validationController.validateMessage, messageController.postMessage, (req, res) => {
   return res.sendStatus(200);
 });
 
@@ -25,6 +27,7 @@ emoteRouter.get('/feed', messageController.getMessages, (req, res) => {
 });
 
 //Delete emote/message
+// expects body with {_id: [id of message to delete]}
 emoteRouter.delete('/feed', messageController.deleteMessage, (req, res) => {
   return res.sendStatus(200);
 });
