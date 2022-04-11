@@ -11,9 +11,9 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import EmojiPicker from "./EmojiPicker.jsx";
 
 const pages = []; // ["About", "Account"];
-const settings = [];// ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -23,7 +23,7 @@ const ResponsiveAppBar = (props) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    //setAnchorElUser(event.currentTarget);
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -123,11 +123,10 @@ const ResponsiveAppBar = (props) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <EmojiPicker insert={(char) => {
+                props.changePFP(char);
+                handleCloseUserMenu();
+                }}/>
             </Menu>
           </Box>
         </Toolbar>

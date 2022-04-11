@@ -16,11 +16,16 @@ const test_messages = [
 class App extends Component {
   constructor() {
     super();
-    this.state = { messages: [], pfp: '😀' };
+    this.state = { messages: [], pfp: '😀'};
     this.sendMessage = this.sendMessage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.insert = this.insert.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.changePFP = this.changePFP.bind(this);
+  }
+
+  changePFP(char) {
+    this.setState({...this.state, pfp: char});
   }
 
   sendMessage() {
@@ -118,7 +123,7 @@ class App extends Component {
 
     return (
       <div className="main-container">
-        <ResponsiveAppBar pfp={this.state.pfp}/>
+        <ResponsiveAppBar pfp={this.state.pfp} changePFP={this.changePFP}/>
         {/*Event handlers that modify state are passed into Compose component
         as well as the current message*/}
         <Compose
