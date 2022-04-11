@@ -6,8 +6,7 @@ const messageController = {};
 // Middleware for posting a new emote/message
 // No result
 messageController.postMessage = (req, res, next) => {
-  console.log(req.body);
-  const { message, pfp } = req.body; // Object {"message": String}
+  const { message, pfp } = req.body; // Object {"message": String, "pfp": String}
   const values = [message, pfp];
 
   const queryText = "INSERT INTO messages (message, pfp) VALUES ($1, $2)";
