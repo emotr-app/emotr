@@ -2,8 +2,6 @@ node_modules/
 .DS_Store
 dist
 
-package-lock.json
-
 # These are tim's files
 __tests__/messageController.js
 __tests__/test_db/
