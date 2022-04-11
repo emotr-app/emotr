@@ -1,11 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-const Emote = props => {
+const Emote = (props) => {
   return (
-    <div className='emote'>
-      <span className='pfp'>😃</span>
+    <div className="emote">
+      <span className="pfp">😃</span>
       {props.msg}
-      <button className='deleteButton'>🗑️</button>
+      <button
+        className="deleteButton"
+        onClick={() => props.handleDelete(props.id)}
+      >
+        🗑️
+      </button>
     </div>
   );
 };
