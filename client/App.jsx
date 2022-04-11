@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { createRoot } from "react-dom/client";
-import Emote from "./components/Emote.jsx";
-import ResponsiveAppBar from "./components/Navbar.jsx";
-// import EmojiPicker from "./components/EmojiPicker.jsx";
-import Compose from "./components/Compose.jsx";
+import React, {Component} from 'react';
+import {createRoot} from 'react-dom/client';
+import Emote from './components/Emote.jsx';
+import ResponsiveAppBar from './components/Navbar.jsx';
+//import EmojiPicker from './components/EmojiPicker.jsx';
+import Compose from './components/Compose.jsx';
 
 const test_messages = [
   { _id: -100, message: "🧀 🚸 ♠️ ⛔️ 💴 🔜 🆖 😙 🙀 🍋 👪 🗣 💛 😅 🐔 🏰" },
@@ -19,6 +19,7 @@ class App extends Component {
     this.state = { messages: [] };
     this.sendMessage = this.sendMessage.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.insert = this.insert.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
@@ -75,6 +76,10 @@ class App extends Component {
       .catch((err) => console.log(err));
   }
 
+  insert(char) {
+    this.setState({...this.state, currentMessage: this.state.currentMessage+char});
+  }
+
   loadMessages() {
     //Send a GET request to the endpoint '/feed'
     fetch("/feed")
@@ -117,6 +122,7 @@ class App extends Component {
         {/*Event handlers that modify state are passed into Compose component
         as well as the current message*/}
         <Compose
+          insert={this.insert}
           change={this.handleChange}
           send={this.sendMessage}
           currentMessage={this.state.currentMessage}
