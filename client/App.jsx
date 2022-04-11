@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {createRoot} from 'react-dom/client';
 import Emote from './components/Emote.jsx';
 import ResponsiveAppBar from './components/Navbar.jsx';
+import EmojiPicker from './components/EmojiPicker.jsx';
 import Compose from './components/Compose.jsx';
 
 const test_messages = [
