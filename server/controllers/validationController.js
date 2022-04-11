@@ -1,11 +1,13 @@
 //import/require database
+const emojiRegex = require('emoji-regex');
 const db = require('../db/db.js');
 
 const validationController = {};
 
 const messageIsOnlyEmojis = (msg) => {
-  const regex = /^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])+$/gi;
-  return regex.test(msg);
+  //const regex = /^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])+$/gi;
+  const regex = emojiRegex();
+  return msg && msg.match(regex).join('') === msg;
 };
 
 // Checks to make sure the submitted message is only emojis. For now, accepts anything with unicode character > 8505

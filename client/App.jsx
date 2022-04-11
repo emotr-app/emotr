@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {createRoot} from 'react-dom/client';
-import Emote from './components/Emote.jsx';
-import ResponsiveAppBar from './components/Navbar.jsx';
-//import EmojiPicker from './components/EmojiPicker.jsx';
-import Compose from './components/Compose.jsx';
+import React, { Component } from "react";
+import { createRoot } from "react-dom/client";
+import Emote from "./components/Emote.jsx";
+import ResponsiveAppBar from "./components/Navbar.jsx";
+import Compose from "./components/Compose.jsx";
+import emojiRegex from "emoji-regex";
 
 const test_messages = [
   { _id: -100, message: "🧀 🚸 ♠️ ⛔️ 💴 🔜 🆖 😙 🙀 🍋 👪 🗣 💛 😅 🐔 🏰" },
@@ -16,16 +16,21 @@ const test_messages = [
 class App extends Component {
   constructor() {
     super();
-    this.state = { messages: [] };
+    this.state = { messages: [], pfp: '😀'};
     this.sendMessage = this.sendMessage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.insert = this.insert.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.changePFP = this.changePFP.bind(this);
+  }
+
+  changePFP(char) {
+    this.setState({...this.state, pfp: char});
   }
 
   sendMessage() {
     //Construct the request body with the current message, turned into a JSON string
-    const body = JSON.stringify({ message: this.state.currentMessage });
+    const body = JSON.stringify({ message: this.state.currentMessage, pfp: this.state.pfp });
 
     //Construct the POST request with the request body
     const request = {
@@ -51,8 +56,8 @@ class App extends Component {
   handleChange(event) {
     // Check if current message is only emojis.
     const msg = event.target.value;
-    const regex = /^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])*$/gi;
-    if (!regex.test(msg)) return; // what is the expected behavior when a non-emoji is attempted? Nothing?
+    const regex = emojiRegex(); ///^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])*$/gi;
+    if (msg && msg.match(regex).join('') !== msg) return; // what is the expected behavior when a non-emoji is attempted? Nothing?
 
     this.setState({ ...this.state, currentMessage: event.target.value });
   }
@@ -77,7 +82,10 @@ class App extends Component {
   }
 
   insert(char) {
-    this.setState({...this.state, currentMessage: this.state.currentMessage+char});
+    this.setState({
+      ...this.state,
+      currentMessage: this.state.currentMessage + char,
+    });
   }
 
   loadMessages() {
@@ -105,12 +113,13 @@ class App extends Component {
     const emotes = [];
 
     for (let i = messages.length - 1; i >= 0; i--) {
-      const { _id, message } = messages[i];
+      const { _id, message, pfp } = messages[i];
       emotes.push(
         <Emote
           key={_id}
           id={_id}
           msg={message}
+          pfp={pfp}
           handleDelete={this.handleDelete}
         />
       );
@@ -118,10 +127,11 @@ class App extends Component {
 
     return (
       <div className="main-container">
-        <ResponsiveAppBar />
+        <ResponsiveAppBar pfp={this.state.pfp} changePFP={this.changePFP}/>
         {/*Event handlers that modify state are passed into Compose component
         as well as the current message*/}
         <Compose
+          pfp={this.state.pfp}
           insert={this.insert}
           change={this.handleChange}
           send={this.sendMessage}
