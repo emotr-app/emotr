@@ -1,26 +1,40 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .pfp {
-  font-size: 72pt;
+  font-size: 70px;
+  margin: 20px;
 }
 
 .emote {
   padding: 10pt;
   margin: 10pt;
-  width: 50%;
+  width: 240px;
   border: 1px solid lightgray;
   border-radius: 6pt;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: 21px;
 }
 
 .deleteButton {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
 }
 
 button {
   margin: 10pt;
-  width: 50pt;
-  height: 20pt;
+  width: 30pt;
+  height: 30pt;
   border-radius: 4pt;
   background-color: whitesmoke;
+}
+
+#composeBox {
+  width: 190px;
 }

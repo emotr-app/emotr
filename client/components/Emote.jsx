@@ -3,14 +3,11 @@ import React, { Component } from "react";
 const Emote = (props) => {
   return (
     <div className="emote">
-      <span className="pfp">😃</span>
-      {props.msg}
-      <button
-        className="deleteButton"
-        onClick={() => props.handleDelete(props.id)}
-      >
-        🗑️
-      </button>
+      <div className="deleteButton">
+        <button onClick={() => props.handleDelete(props.id)}>🗑️</button>
+      </div>
+      <div className="pfp">😃</div>
+      <div>{props.msg}</div>
     </div>
   );
 };
