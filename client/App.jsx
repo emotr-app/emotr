@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import Emote from "./components/Emote.jsx";
 import ResponsiveAppBar from "./components/Navbar.jsx";
 import Compose from "./components/Compose.jsx";
+import emojiRegex from "emoji-regex";
 
 const test_messages = [
   { _id: -100, message: "🧀 🚸 ♠️ ⛔️ 💴 🔜 🆖 😙 🙀 🍋 👪 🗣 💛 😅 🐔 🏰" },
@@ -55,9 +56,8 @@ class App extends Component {
   handleChange(event) {
     // Check if current message is only emojis.
     const msg = event.target.value;
-    const regex =
-      /^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])*$/gi;
-    if (!regex.test(msg)) return; // what is the expected behavior when a non-emoji is attempted? Nothing?
+    const regex = emojiRegex(); ///^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])*$/gi;
+    if (msg && msg.match(regex).join('') !== msg) return; // what is the expected behavior when a non-emoji is attempted? Nothing?
 
     this.setState({ ...this.state, currentMessage: event.target.value });
   }
