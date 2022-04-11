@@ -4,7 +4,6 @@ class Compose extends Component {
   constructor(props) {
     super(props);
 
-    this.send = props.send;
   }
 
   render() {
