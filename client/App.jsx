@@ -51,7 +51,7 @@ class App extends Component {
   handleChange(event) {
     // Check if current message is only emojis.
     const msg = event.target.value;
-    const regex = /^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])+$/gi;
+    const regex = /^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])*$/gi;
     if (!regex.test(msg)) return; // what is the expected behavior when a non-emoji is attempted? Nothing?
 
     this.setState({ ...this.state, currentMessage: event.target.value });
