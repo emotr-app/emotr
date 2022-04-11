@@ -46,6 +46,8 @@ class App extends Component {
   }
 
   handleChange(event) {
+    // TO DO: ADD REGEX MATCH FOR SANITIZING USER INPUT (Emoji's only!)
+    
     this.setState({...this.state, currentMessage: event.target.value});
   }
 
