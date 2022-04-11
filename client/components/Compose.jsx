@@ -43,7 +43,7 @@ class Compose extends Component {
           }
           position="right top"
         >
-          <div style={{ "margin-left": "20px" }}>
+          <div style={{ "marginLeft": "20px" }}>
             <EmojiPicker insert={this.props.insert} />
           </div>
         </Popup>
