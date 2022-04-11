@@ -40,6 +40,7 @@ messageController.getMessages = (req, res, next) => {
 
 // Middleware for deleting emote/message
 // No result
+// expects body with {_id: [id of message to delete]}
 messageController.deleteMessage = (req, res, next) => {
   const deleteId = req.body._id; // Object {"_id": Number}
   values = [deleteId];
