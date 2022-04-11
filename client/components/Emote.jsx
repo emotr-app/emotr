@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 const Emote = (props) => {
   return (
@@ -7,7 +7,7 @@ const Emote = (props) => {
         <button onClick={() => props.handleDelete(props.id)}>🗑️</button>
       </div>
       <div className="pfp">{props.pfp ?? '😀'}</div>
-      <div>{props.msg}</div>
+      <div className="message-body">{props.msg}</div>
     </div>
   );
 };

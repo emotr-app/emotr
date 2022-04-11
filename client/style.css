@@ -21,6 +21,11 @@
   font-size: 21px;
 }
 
+.message-body {
+  word-wrap:break-word;
+  width: 100%;
+}
+
 .deleteButton {
   position: absolute;
   top: 0;
