@@ -108,7 +108,7 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <div className="main-container">
         <ResponsiveAppBar />
         {/*Event handlers that modify state are passed into Compose component
         as well as the current message*/}
@@ -117,7 +117,7 @@ class App extends Component {
           send={this.sendMessage}
           currentMessage={this.state.currentMessage}
         />
-        {emotes}
+        <div className="feed">{emotes}</div>
       </div>
     );
   }
