@@ -25,46 +25,29 @@ describe('Route integration', () => {
           .expect(200);
       });
 
-
       it('gives a 404 when trying to access a nonexistent page', () => {
-        return request(server)
-          .get('/feed/alsdkfjlsakdfj')
-          .expect(404);
+        return request(server).get('/feed/alsdkfjlsakdfj').expect(404);
       });
     });
 
     describe('POST', () => {
       it('responds with 200 status and text/html content type', async () => {
-        const response = await request(server)
-          .post('/feed')
-          .send({
-            "message": "😀"
-          });
-
+        const response = await request(server).post('/feed').send({
+          message: '😀',
+        });
 
         // cleanup
         const queryStringDelete = `DELETE FROM messages WHERE message = '😀'`;
         db.query(queryStringDelete);
-        expect(response.statusCode).toBe(200);      
+        expect(response.statusCode).toBe(200);
       });
 
-      it('handles messages which are too long gracefully', () => {
-        return request(server)
-          .post('/feed')
-          .send({
-            "message": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
-          })
-          .expect(400);
-      });
+      it("doesn't allow messages which include normal letters", async () => {
+        const msg = 'forbidden msg';
+        const result = await request(server).post('/feed').send({
+          message: msg,
+        });
 
-      it('doesn\'t allow messages which include normal letters', async () => {
-        const msg = "forbidden msg";
-        const result = await request(server)
-          .post('/feed')
-          .send({
-            "message": msg
-          });
-        
         expect(result.statusCode).toBe(400);
         await db.query(`DELETE FROM messages WHERE message = '${msg}'`);
       });
@@ -73,15 +56,13 @@ describe('Route integration', () => {
         return request(server)
           .post('/feed')
           .send({
-            "bad key": "bad val"
+            'bad key': 'bad val',
           })
           .expect(400);
       });
-
     });
 
     describe('DELETE', () => {
-
       let idToDelete;
       let msg = '😀😀😀';
       beforeEach(async () => {
@@ -99,10 +80,9 @@ describe('Route integration', () => {
 
       it('deletes a message', async () => {
         // delete message via server
-        const result =
-          await request(server)
+        const result = await request(server)
           .del(`/feed`)
-          .send({"_id": idToDelete});
+          .send({ _id: idToDelete });
 
         console.log('deleted');
         expect(result.statusCode).toBe(200);
@@ -111,8 +91,6 @@ describe('Route integration', () => {
   });
 
   it('gives a 404 when trying to access a nonexistent page', () => {
-    return request(server)
-      .get('/asdlkfjaslkfj')
-      .expect(404);
+    return request(server).get('/asdlkfjaslkfj').expect(404);
   });
 });

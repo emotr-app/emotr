@@ -14,8 +14,8 @@ DROP TABLE IF EXISTS messages;
 CREATE TABLE messages(
   _id SERIAL,
   _user_id INT,
-  message VARCHAR(16),
-  pfp VARCHAR(1),
+  message VARCHAR(128),
+  pfp VARCHAR(10),
   PRIMARY KEY(_id),
   CONSTRAINT fk_user_id
     FOREIGN KEY(_user_id)
